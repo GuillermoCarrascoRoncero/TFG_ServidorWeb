@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.85" />
+    <title>Brazo Robotico</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" href="data:," />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Brazo Robotico</h1>
+
+      <!-- Boton de Reset -->
+      <div class="button-container">
+        <button id="resetButton" onclick="resetServo()">Reset</button>
+      </div>
+
+      <!-- Sliders de control de cada servo -->
+      <div class="slider-container">
+        <label
+          >Servo Garra
+          <img src="images/clawImage.png" alt="clawIcon" class="label-icon" />
+          <span id="clawValue" class="current-value">90°</span>
+        </label>
+        <div class="slider-labels">
+          <span class="slider-left-label">Abrir</span>
+          <span class="slider-right-label">Cerrar</span>
+        </div>
+        <input
+          type="range"
+          min="30"
+          max="110"
+          value="90"
+          class="slider"
+          id="clawSlider"
+          oninput="syncSlider('claw', this); throttledMoveServo('claw', this)"
+          onchange="moveServo('claw', this)"
+        />
+      </div>
+
+      <div class="slider-container">
+        <label
+          >Servo Muñeca Rotación
+          <img
+            src="images/wristRotationImage.png"
+            alt="wristRotationIcon"
+            class="label-icon"
+          />
+          <span id="wristRotationValue" class="current-value">90°</span>
+        </label>
+        <div class="slider-labels">
+          <span class="slider-left-label">Horizontal</span>
+          <span class="slider-right-label">Vertical</span>
+        </div>
+        <input
+          type="range"
+          min="90"
+          max="180"
+          value="90"
+          class="slider"
+          id="wristRotationSlider"
+          oninput="syncSlider('wristRotation', this); throttledMoveServo('wristRotation', this)"
+          onchange="moveServo('wristRotation', this)"
+        />
+      </div>
+
+      <div class="slider-container">
+        <label
+          >Servo Muñeca Inclinación
+          <img
+            src="images/wristTiltImage.png"
+            alt="wristTiltIcon"
+            class="label-icon"
+          />
+          <span id="wristTiltValue" class="current-value">90°</span>
+        </label>
+        <div class="slider-labels">
+          <span class="slider-left-label">Arriba</span>
+          <span class="slider-right-label">Abajo</span>
+        </div>
+        <input
+          type="range"
+          min="90"
+          max="180"
+          value="180"
+          class="slider"
+          id="wristTiltSlider"
+          oninput="syncSlider('wristTilt', this); throttledMoveServo('wristTilt', this)"
+          onchange="moveServo('wristTilt', this)"
+        />
+      </div>
+
+      <div class="slider-container">
+        <label
+          >Servo Codo
+          <img src="images/elbowImage.png" alt="elbowIcon" class="label-icon" />
+          <span id="elbowValue" class="current-value">90°</span>
+        </label>
+        <div class="slider-labels">
+          <span class="slider-left-label">Abajo</span>
+          <span class="slider-right-label">Arriba</span>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="30"
+          value="30"
+          class="slider"
+          id="elbowSlider"
+          oninput="syncSlider('elbow', this); throttledMoveServo('elbow', this)"
+          onchange="moveServo('elbow', this)"
+        />
+      </div>
+
+      <div class="slider-container">
+        <label
+          >Servo Hombro
+          <img
+            src="images/shoulderImage.png"
+            alt="shoulderIcon"
+            class="label-icon"
+          />
+          <span id="shoulderValue" class="current-value">90°</span>
+        </label>
+        <div class="slider-labels">
+          <span class="slider-left-label">Abajo</span>
+          <span class="slider-right-label">Arriba</span>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="40"
+          value="40"
+          class="slider"
+          id="shoulderSlider"
+          oninput="syncSlider('shoulder', this); throttledMoveServo('shoulder', this)"
+          onchange="moveServo('shoulder', this)"
+        />
+      </div>
+
+      <div class="slider-container">
+        <label
+          >Servo Base
+          <img src="images/baseImage.png" alt="baseIcon" class="label-icon" />
+          <span id="baseValue" class="current-value">90°</span>
+        </label>
+        <div class="slider-labels">
+          <span class="slider-left-label">Izquierda</span>
+          <span class="slider-right-label">Derecha</span>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="180"
+          value="90"
+          class="slider"
+          id="baseSlider"
+          oninput="syncSlider('base', this); throttledMoveServo('base', this)"
+          onchange="moveServo('base', this)"
+        />
+      </div>
+
+      <!-- Botones de control Bajar, Agarrar, Cancelar y Soltar-->
+      <div class="button-container">
+        <button id="lowerButton" onclick="lowerArm()">Bajar</button>
+        <div id="lowerButtonOptions" class="hidden-button">
+          <button id="gripButton" onclick="gripArm()">Agarrar</button>
+          <button id="cancelMovementButton" onclick="cancelMovement()">Cancelar</button>
+        </div>
+        <button id="releaseButton" onclick="releaseArm()">Soltar</button>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="/script.js"></script>
+    </div>
+  </body>
+</html>
